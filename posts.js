@@ -14,15 +14,15 @@ function updateContent(posts){
         //jQuery function to append to the innterHTML of the div with id = 'postsContent'
         $('#postsContent').append(
             '<nav class="navbar navbar-default" style="width:490px; margin:20px auto;">' +
-            '<div style="margin:20px;" data-postId="' + post._id + '">' +
+            '<div style="margin:20px;" data-postId="' + post.userID + '">' +
             '<img src="' + post.image + '" width="450" height="450"/>' +
             '<div class="container-fluid" style="padding: 0px; margin: 10px 0 0 0;">' +
-            '<p><b>' + post.comment + '</b> ' + lorem + ' <b>Post ID:</b> ' + post._id + '.</p></div>' +
+            '<p><b>' + post.comment + '</b> ' + lorem + ' <b>Post ID:</b> ' + post.userID + '.</p></div>' +
             '<ul class="nav navbar-nav navbar-right">' +
                 '<li><p class="navbar-text" id="ilikethis">' + likeString + '</p></li>' +
                 '<li><p class="navbar-text">Like Count: ' +
-                    '<span id ="like' + post._id + '">' + post.likeCount + '</span></p></li>' +
-                '<li><button onclick="onLikeClick(\'' + post._id + '\');" class="btn btn-default navbar-btn">Like</button></li>' +
+                    '<span id ="like' + post.userID + '">' + post.likeCount + '</span></p></li>' +
+                '<li><button onclick="onLikeClick(\'' + post.userID + '\');" class="btn btn-default navbar-btn">Like</button></li>' +
             '</ul></div></nav>'
         );
     });
@@ -34,7 +34,7 @@ function onContentLoad(){
     .then(function(){
         //jQuery function to request all the posts from the server
         //the 'return' is required. Otherwise, the subsequent then will not wait for this to complete
-        return $.post('postsContent');
+        return $.post('server/showPosts.php');
     })
     //when the server responds, we'll execute this code
     .then(function(posts){
@@ -51,7 +51,7 @@ function onRemovePosts(){
     .then(function(){
         //jQuery function to request all the posts from the server
         //the 'return' is required. Otherwise, the subsequent then will not wait for this to complete
-        return $.post('removePosts');
+        return $.post('server/removePosts.php');
     })
     //when the server responds, we'll execute this code
     .then(function(posts){
@@ -69,7 +69,7 @@ function onLikeClick(id){
         //jQuery provides a nice convenience method for easily sending a post with parameters in JSON
         //here we pass the ID to the incrLike route on the server side so it can do the incrementing for us
         //note the return. This MUST be here, or the subsequent then will not wait for this to complete
-        return $.post('incrLike', {id : id});
+        return $.post('server/incrLike.php', {id : id});
     })
     .then(function(like){
         //jQuery provides a nice convenience methot for easily setting the count to the value returned
@@ -82,38 +82,50 @@ function onLikeClick(id){
 } // onLikeClick()
 
 function onImageUpload(){
-    //go get the data from the form
-    var form = new FormData($("#uploadForm")[0]);
     
-    //we can post this way as well as $.post
+    //* TODO: Return upload form!
     Promise.resolve()
     .then(function(){
-		$.ajax({
-		        url: '/upload',
-		        method: "POST",
-		        dataType: 'json',
-		        //the form object is the data
-		        data: form,
-		        //we want to send it untouched, so this needs to be false
-		        processData: false,
-		        contentType: false,
-		        //add a message 
-		        success: function(result){},
-		        error: function(er){}
-		});
+        //jQuery function to request all the posts from the server
+        //the 'return' is required. Otherwise, the subsequent then will not wait for this to complete
+        return $.post('server/uploadImage.php');
     })
     //when the server responds, we'll execute this code
-    // .then(function(){
-    //     //jQuery function to request all the posts from the server
-    //     //the 'return' is required. Otherwise, the subsequent then will not wait for this to complete
-    //     return $.post('postsContent');
-    // })
-    //when the server responds, we'll execute this code
     .then(function(posts){
-    	return updateContent(posts);
+        return updateContent(posts);
     })
     .catch(function(err){
         //always include a catch for exceptions
         console.log(err);
     });
+
+
+//     //go get the data from the form
+//     var form = new FormData($("#uploadForm")[0]);
+    
+//     //we can post this way as well as $.post
+//     Promise.resolve()
+//     .then(function(){
+// 		$.ajax({
+// 		        url: '/upload',
+// 		        method: "POST",
+// 		        dataType: 'json',
+// 		        //the form object is the data
+// 		        data: form,
+// 		        //we want to send it untouched, so this needs to be false
+// 		        processData: false,
+// 		        contentType: false,
+// 		        //add a message 
+// 		        success: function(result){},
+// 		        error: function(er){}
+// 		});
+//     })
+//     //when the server responds, we'll execute this code
+//     .then(function(posts){
+//     	return updateContent(posts);
+//     })
+//     .catch(function(err){
+//         //always include a catch for exceptions
+//         console.log(err);
+//     });
 } // onImageUpload()
