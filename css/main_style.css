@@ -1,0 +1,57 @@
+body {
+    background-color: white;
+    width: 800px;
+    margin: auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+	text-align: justify;
+}
+/* HEADER */
+.a_btn {
+    margin: 0 10 0 0;
+}
+
+li {
+    display: inline-block;
+}
+
+.a_icon {
+    margin: 8px 0px;
+}
+
+.search {
+    margin: 15px 20px;
+    width: 200px;
+    height: 24px;
+}
+
+/* PROFILE PAGE */
+#User {
+    clear: both;
+}
+
+#Content {
+    clear: both;
+    margin: 20px;
+}
+
+#profile_photo {
+    border-radius: 50%;
+    width: 160px;
+    height: 160px;
+}
+
+.photo_content{
+    height: 300px;
+    width: 300px;
+}
+
+/* FOOTER */
+.footer_item {
+    padding: 15px;
+}

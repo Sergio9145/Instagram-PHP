@@ -1,0 +1,76 @@
+<!-- Instagram Clone
+
+Conestoga College, Mobile Solutions Development program
+PROG8185 "Web Technologies"
+
+Author: Sergiy Opryshko (#7759145) sopryshko9145@conestogac.on.ca
+	
+All copyrights reserved. -->
+
+<!doctype html>
+<html lang="en" ng-app>
+  <head>
+    <title>Instagram Clone</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- COMMON STYLES -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/main_style.css">
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+    
+    <!-- COMMON SCRIPTS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div id="headerContent">
+    	<script>
+    		$(function(){$("#headerContent").load("header.html");});
+		  </script>
+	  </div>
+    
+    <div id="bodyContent" style="margin: 30px;">
+    	<img src="./img/bg_red_resized.png" style="width: 100%;"/>
+        <h1>About the project:</h1>
+    	    <p>This clone of <a href="https://www.instagram.com/" target="_blank">Instagram</a> was made as an assignment of a course
+    	    <b>PROG8185 "Web Technologies"</b> of a
+    	    <a href="https://www.conestogac.on.ca/fulltime/mobile-solutions-development" target="_blank">Mobile Solutions Development</a>
+    	    program at <a href="https://www.conestogac.on.ca/" target="_blank">Conestoga College</a>, Kitchener, ON, Canada.</p>
+    	    <p>Project allows to create an account, add posts with images and like them just like the real Instagram does! All users' and
+    	    posts' data is stored in a MySQL database. Search is NOT working.</p>
+    	    <p>Sample images for testing the functionality: <a href="./img/elephants.zip">elephants.zip</a>.</p>
+    	    <p>Author is Sergiy Opryshko. All rights are (probably) reserved.</p>
+    	    
+        <div class="container-fluid">
+        	<div class="row">
+    	        <div class="col-sm-6 col-sm-offset-3">
+    	            <div class="form-group">
+    	                <center>
+    	                    <button class="btn btn-lg btn-primary" onclick="location.href='posts.html'">POSTS</button>
+    	                </center>
+    	            </div>
+        	    </div>
+        	</div>
+        </div>
+    	
+        <h1>Change Log:</h1>
+            <p>
+                <b>v0.0.1:170916</b> - Basic version of the index.html.
+            </p>
+    
+        <h1>GitHub:</h1>
+            <p>
+                <a href="https://github.com/Sergio9145/Instagram-PHP" target="_blank">Sergio9145/Instagram-PHP</a>
+            </p>
+    </div>
+
+    <div id="footerContent">
+      <script>
+        $(function(){$("#footerContent").load("footer.html");});
+      </script>
+    </div>
+</body>
+</html>
