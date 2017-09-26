@@ -10,6 +10,7 @@ try {
     $db->exec('CREATE TABLE IF NOT EXISTS Posts ( ' .
               'ID INT AUTO_INCREMENT PRIMARY KEY, ' .
               'userID TEXT, ' .
+              'postID TEXT, ' .
               'image TEXT, ' .
               'comment TEXT, ' .
               'likeCount INT DEFAULT 0, ' .

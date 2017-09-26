@@ -11,4 +11,7 @@ try {
 } catch(PDOException $e) {
     echo $e->getMessage();
 }
+
+array_map('unlink', glob("uploads/*"));
+
 ?>
