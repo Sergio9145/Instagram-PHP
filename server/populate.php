@@ -7,6 +7,7 @@ $username = getenv('C9_USER');
 try {
     $db = new PDO("mysql:dbname=c9;host=$servername", $username, "" );
     $db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION ); // Error Handling
+    
     $db->exec('CREATE TABLE IF NOT EXISTS Posts ( ' .
               'ID INT AUTO_INCREMENT PRIMARY KEY, ' .
               'userID TEXT, ' .
@@ -15,6 +16,16 @@ try {
               'likeCount INT DEFAULT 0, ' .
               'feedbackCount INT DEFAULT 0 '.
               ')');
+              
+    for ($i = 1; $i <= 6; $i++) {
+    $db->exec("INSERT INTO Posts (" .
+              "userID, image, comment, likeCount, feedbackCount ) VALUES ('" .
+              $_SESSION['email'] .
+              "', 'img/el" . $i . ".png', '', 0, 0" .
+              ")"
+              );    
+    }
+
 } catch(PDOException $e) {
     echo $e->getMessage();
 }

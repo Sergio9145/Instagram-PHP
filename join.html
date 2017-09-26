@@ -1,0 +1,88 @@
+<!-- Instagram Clone
+
+Conestoga College, Mobile Solutions Development program
+PROG8185 "Web Technologies"
+
+Author: Sergiy Opryshko (#7759145) sopryshko9145@conestogac.on.ca
+	
+All copyrights reserved. -->
+
+<!doctype html>
+<html lang="en" ng-app>
+  <head>
+    <title>Instagram Clone</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- COMMON STYLES -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/main_style.css">
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+    
+    <!-- COMMON SCRIPTS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+      /*global $*/
+      function onJoin() {
+          var email = $('#email').val();
+          var password = $('#password').val();
+          var repeatPassword = $('#repeat_password').val();
+          
+          if (email.length > 0 && password.length > 0 && repeatPassword.length > 0 && password == repeatPassword) {
+              $.post('server/registerUser.php', { email: email, password: password }).done(function(response) {
+                  if (response == "ok")
+                    window.location = 'posts.php';
+              });
+          } else {
+              $('#error').html('Please provide both username and password and ensure passwords match.');
+          }
+      }
+    </script>
+</head>
+
+<body>
+    <div id="headerContent">
+    	<script>
+    		$(function(){$("#headerContent").load("header.html");});
+		  </script>
+	  </div>
+    
+    <div id="bodyContent" style="margin: 30px;">
+        <div class="container-fluid">
+        	<div class="row">
+        	    <div class="col-sm-6 col-sm-offset-3">
+        	        <center>
+                	<h1>Create an account</h1>
+        	
+        	        <div class="form-group">
+        	            <input type="text" name="email" id="email" class="form-control" placeholder="Email" required autofocus/>
+        			</div>
+        	
+        	        <div class="form-group">
+        	            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required/>
+        			</div>
+        	
+        	        <div class="form-group">
+        	            <input type="password" id="repeat_password" class="form-control" placeholder="Repeat Password" required/>
+        			</div>
+        	
+        	        <div class="form-group">
+        	            <button class="btn btn-lg btn-primary" onclick="onJoin()">Join</button>
+        			</div>
+        	        
+        	        <p id="error"></p>
+        	        </center>
+        	    </div>
+        	</div>
+        </div>
+    </div>
+
+    <div id="footerContent">
+      <script>
+        $(function(){$("#footerContent").load("footer.html");});
+      </script>
+    </div>
+</body>
+</html>
