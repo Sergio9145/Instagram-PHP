@@ -23,11 +23,21 @@ All copyrights reserved. -->
     <!-- COMMON SCRIPTS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+    /*global $*/
+    function onDropUsers() {
+        $.post('server/dropUsers.php').done(function(response) {
+            if (response == "ok")
+                window.location = 'posts.php';
+        });
+    }
+    </script>
 </head>
 
 <body>
     <div id="headerContent">
     	<script>
+    	    /*global $*/
     		$(function(){$("#headerContent").load("header.html");});
 		  </script>
 	  </div>
@@ -43,12 +53,16 @@ All copyrights reserved. -->
     	    posts' data is stored in a MySQL database. Search is NOT working.</p>
     	    <p>Sample images for testing the functionality: <a href="./img/elephants.zip">elephants.zip</a>.</p>
     	    <p>Author is Sergiy Opryshko. All rights are (probably) reserved.</p>
+    	    <p><a href="javascript:onDropUsers()">DROP USERS TABLE</a></p>
 
         <center>
             <button class="btn btn-lg btn-primary" onclick="location.href='posts.php'">POSTS</button>
         </center>
 
         <h1>Change Log:</h1>
+            <p>
+                <b>v0.0.6:17027</b> - Added Login and Logout, storing users in mySQL and dropping them.
+            </p>
             <p>
                 <b>v0.0.5:170926</b> - Added Like support.
             </p>
@@ -73,6 +87,7 @@ All copyrights reserved. -->
 
     <div id="footerContent">
       <script>
+        /*global $*/
         $(function(){$("#footerContent").load("footer.html");});
       </script>
     </div>

@@ -25,15 +25,15 @@ All copyrights reserved. -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
       /*global $*/
-      function onJoin() {
+      function onReset() {
           var email = $('#email').val();
           var password = $('#password').val();
           var repeatPassword = $('#repeat_password').val();
           
-          if (email.length > 0 && password.length > 0 && repeatPassword.length > 0 && password == repeatPassword) {
-              $.post('server/registerUser.php', { email: email, password: password }).done(function(response) {
+          if (email.length > 0 && password.length > 0 && repeatPassword.length > 0 && password == repeatPassword){
+              $.post('server/reset.php', { email: email, password: password }).done(function(response) {
                   if (response == "ok")
-                    window.location = 'posts.php';
+                    window.location = 'signin.html';
               });
           } else {
               $('#error').html('Please provide both username and password and ensure passwords match.');
@@ -45,7 +45,7 @@ All copyrights reserved. -->
 <body>
     <div id="headerContent">
     	<script>
-    	  /*global $*/
+    	    /*global $*/
     		$(function(){$("#headerContent").load("header.html");});
 		  </script>
 	  </div>
@@ -55,23 +55,23 @@ All copyrights reserved. -->
         	<div class="row">
         	    <div class="col-sm-6 col-sm-offset-3">
         	        <center>
-                	<h1>Create an account</h1>
+                	<h1>Reset a password</h1>
         	
         	        <div class="form-group">
         	            <input type="text" name="email" id="email" class="form-control" placeholder="Email" required autofocus/>
-                  </div>
+        			</div>
         	
         	        <div class="form-group">
         	            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required/>
-                  </div>
+        			</div>
         	
         	        <div class="form-group">
         	            <input type="password" id="repeat_password" class="form-control" placeholder="Repeat Password" required/>
-                  </div>
+        			</div>
         	
         	        <div class="form-group">
-        	            <button class="btn btn-lg btn-primary" onclick="onJoin()">Join</button>
-                  </div>
+        	            <button class="btn btn-lg btn-primary" onclick="onReset()">Reset</button>
+        			</div>
         	        
         	        <p id="error"></p>
         	        </center>

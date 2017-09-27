@@ -29,7 +29,7 @@ All copyrights reserved. -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<script>
-	/*global $*/
+		/*global $*/
 		/* Function used to update user's page on POST-requests */
 		function updateContent(posts){
 		    //jQuery function to set the innerHTML of the div with id = 'postsContent' to empty
@@ -130,6 +130,23 @@ All copyrights reserved. -->
 			});
 		}
 		
+		function onLogout() {
+			Promise.resolve()
+			.then(function(){
+			    //jQuery function to request all the posts from the server
+			    //the 'return' is required. Otherwise, the subsequent then will not wait for this to complete
+			    return $.post('server/logout.php');
+			})
+			//when the server responds, we'll execute this code
+			.then(function(posts){
+			    return updateContent(posts);
+			})
+			.catch(function(err){
+			    //always include a catch for exceptions
+			    console.log(err);
+			});
+		}
+		
 		function onImageUpload() {
 			var form = new FormData($("#uploadForm")[0]);
 
@@ -154,7 +171,8 @@ All copyrights reserved. -->
 
 <body onload="onContentLoad()">
 	<div id="headerContent">
-		<script>	/*global $*/
+		<script>
+			/*global $*/
 			$(function(){$("#headerContent").load("header.html");});
 		</script>
 	</div>
@@ -180,7 +198,8 @@ All copyrights reserved. -->
 		</div>
 
 		<div class="container-fluid" style="line-height:30px; margin:0px 0px 20px 0px;">
-			<button type="button" class="btn btn-default navbar-right" style="margin:0px 0px 0px 0px;" onclick="onRemovePosts()">Clear all</button>
+			<button type="button" class="btn btn-default navbar-right" style="margin:0px 0px 0px 0px;" onclick="onLogout()">Logout</button>
+			<button type="button" class="btn btn-default navbar-right" style="margin:0px 10px 0px 0px;" onclick="onRemovePosts()">Clear all</button>
 			<button type="button" class="btn btn-default navbar-right" data-toggle="modal" data-target="#myModal" style="margin:0px 10px 0px 0px;">Add post</button>
 			<button type="button" class="btn btn-default navbar-right" style="margin:0px 10px 0px 0px;" onclick="onPopulate()">Populate</button>
 		</div>
@@ -189,7 +208,8 @@ All copyrights reserved. -->
 	</div>
 
 	<div id="footerContent">
-	  <script>	/*global $*/
+	  <script>
+		/*global $*/
 	    $(function(){$("#footerContent").load("footer.html");});
 	  </script>
 	</div>
@@ -198,7 +218,7 @@ All copyrights reserved. -->
 
 <?php
 	} else {
-		header("Location: join.html");
+		header("Location: signin.html");
 	}
 ?>
 
