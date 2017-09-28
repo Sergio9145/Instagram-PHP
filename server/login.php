@@ -1,13 +1,15 @@
 <?php
     session_start();
-    $_SESSION['email'] = $_POST['email'];
     
     $servername = getenv('IP');
     $username = getenv('C9_USER');
     
     $response = "fail";
+
+    $_SESSION['email'] = $_POST['email'];
     
-    try {
+    try
+    {
         $db = new PDO("mysql:dbname=c9;host=$servername", $username, "" );
         $db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION ); // Error Handling
         
@@ -18,9 +20,11 @@
         if ($users[0]['userID'] == $_POST['email'] && $users[0]['password'] == $_POST['password'])
             $response = "ok";
 
-    } catch(PDOException $e) {
-        echo $e->getMessage();
     }
+    catch(PDOException $e)
+    {
+        echo $e->getMessage();
+    }        
 
     echo $response;
 ?>
